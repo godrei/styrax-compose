@@ -11,6 +11,10 @@ object Libs {
     const val composeMaterial = "androidx.compose.material:material:$composeVersion"
     const val composeTest = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
+    // Kodein DB
+    const val kodeinDbDebug = "org.kodein.db:kodein-db-android-debug:$kodeinDbVersion"
+    const val kodeinDb = "org.kodein.db:kodein-db-android:$kodeinDbVersion"
+
     // Kotlin
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
@@ -36,5 +40,6 @@ private const val appcompatVersion = "1.3.1"
 private const val activityVersion = "1.3.0"
 private const val buildToolsVersion = "7.1.0-alpha05"
 private const val coreVersion = "1.6.0"
+private const val kodeinDbVersion = "0.8.1-beta"
 private const val materialVersion = "1.4.0"
 private const val spekVersion = "2.0.15"

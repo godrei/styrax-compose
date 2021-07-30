@@ -20,6 +20,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.kagamirai.styrax.ui.ComposeSampleAppTheme
+import org.kodein.db.DB
+import org.kodein.db.impl.open
 
 class StyraxActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,7 @@ fun Styrax() {
     ComposeSampleAppTheme {
         val (value, setter) = remember { mutableStateOf("Android") }
 
+        val db = DB.open("foobar")
         Surface(color = MaterialTheme.colors.background) {
             Greeting(value) {
                 setter(it)

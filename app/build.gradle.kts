@@ -84,6 +84,9 @@ dependencies {
     implementation(Libs.composeFoundation)
     implementation(Libs.composeMaterial)
 
+    debugImplementation(Libs.kodeinDbDebug)
+    releaseImplementation(Libs.kodeinDb)
+
     testImplementation(Libs.kotlinJdk8)
     testImplementation(Libs.kotlinReflect)
     testImplementation(Libs.kotlinTest)
