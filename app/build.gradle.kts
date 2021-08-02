@@ -41,7 +41,6 @@ android {
         }
         getByName("debug") {
             isDebuggable = true
-            signingConfig = null
             isJniDebuggable = true
         }
     }
