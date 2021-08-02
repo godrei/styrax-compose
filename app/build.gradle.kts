@@ -39,6 +39,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+        getByName("debug") {
+            isDebuggable = true
+            signingConfig = null
+            isJniDebuggable = true
+        }
     }
 
     compileOptions {

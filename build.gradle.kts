@@ -39,7 +39,7 @@ val nonStable = mapOf(
 fun isNonStable(group: String, module: String, version: String) =
     nonStable[group]?.any { version.contains(it) } ?: false
 
-tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
+tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
     gradleReleaseChannel = "current"
     rejectVersionIf {
         isNonStable(candidate.group, candidate.module, candidate.version)
