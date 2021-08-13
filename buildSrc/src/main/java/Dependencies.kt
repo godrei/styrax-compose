@@ -31,15 +31,15 @@ object Libs {
     const val gradleVersionsGradlePlugin = "com.github.ben-manes.versions"
 }
 
-const val composeVersion = "1.0.0"
+const val composeVersion = "1.1.0-alpha01"
 const val gradleVersionsVersion = "0.39.0"
-const val kotlinVersion = "1.5.10"
+const val kotlinVersion = "1.5.21"
 
 private const val androidJUnit5Version = "1.7.1.1"
 private const val appcompatVersion = "1.3.1"
-private const val activityVersion = "1.3.0"
-private const val buildToolsVersion = "7.1.0-alpha05"
+private const val activityVersion = "1.3.1"
+private const val buildToolsVersion = "7.1.0-alpha08"
 private const val coreVersion = "1.6.0"
-private const val kodeinDbVersion = "0.8.1-beta"
+private const val kodeinDbVersion = "0.9.0-beta"
 private const val materialVersion = "1.4.0"
-private const val spekVersion = "2.0.15"
+private const val spekVersion = "2.0.16"

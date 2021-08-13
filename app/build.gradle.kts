@@ -39,9 +39,18 @@ android {
                 "proguard-rules.pro"
             )
         }
-        getByName("debug") {
-            isDebuggable = true
-            isJniDebuggable = true
+    }
+
+    flavorDimensions.add("tier")
+
+    productFlavors {
+        create("free") {
+            dimension = "tier"
+            applicationId = "dev.kagamirai.styrax.free"
+        }
+        create("paid") {
+            dimension = "tier"
+            applicationId = "dev.kagamirai.styrax.paid"
         }
     }
 
