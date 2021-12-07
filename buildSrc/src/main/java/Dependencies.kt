@@ -11,10 +11,6 @@ object Libs {
     const val composeMaterial = "androidx.compose.material:material:$composeVersion"
     const val composeTest = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
-    // Kodein DB
-    const val kodeinDbDebug = "org.kodein.db:kodein-db-android-debug:$kodeinDbVersion"
-    const val kodeinDb = "org.kodein.db:kodein-db-android:$kodeinDbVersion"
-
     // Kotlin
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
@@ -31,15 +27,14 @@ object Libs {
     const val gradleVersionsGradlePlugin = "com.github.ben-manes.versions"
 }
 
-const val composeVersion = "1.1.0-alpha01"
+const val composeVersion = "1.1.0-beta04"
 const val gradleVersionsVersion = "0.39.0"
-const val kotlinVersion = "1.5.21"
+const val kotlinVersion = "1.6.0"
 
-private const val androidJUnit5Version = "1.7.1.1"
-private const val appcompatVersion = "1.3.1"
-private const val activityVersion = "1.3.1"
-private const val buildToolsVersion = "7.1.0-alpha08"
-private const val coreVersion = "1.6.0"
-private const val kodeinDbVersion = "0.9.0-beta"
-private const val materialVersion = "1.4.0"
-private const val spekVersion = "2.0.16"
+private const val androidJUnit5Version = "1.8.0.0"
+private const val appcompatVersion = "1.4.0"
+private const val activityVersion = "1.4.0"
+private const val buildToolsVersion = "7.1.0-beta04"
+private const val coreVersion = "1.7.0"
+private const val materialVersion = "1.5.0-beta01"
+private const val spekVersion = "2.0.17"

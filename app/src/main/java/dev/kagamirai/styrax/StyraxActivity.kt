@@ -20,8 +20,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.kagamirai.styrax.ui.ComposeSampleAppTheme
-import org.kodein.db.DB
-import org.kodein.db.impl.open
 
 class StyraxActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +35,6 @@ class StyraxActivity : ComponentActivity() {
 fun Styrax() {
     ComposeSampleAppTheme {
         val (value, setter) = remember { mutableStateOf("Android") }
-
-        val db = DB.open("foobar")
         Surface(color = MaterialTheme.colors.background) {
             Greeting(value) {
                 setter(it)
@@ -50,14 +46,20 @@ fun Styrax() {
 @Composable
 fun Greeting(name: String, updateName: (String) -> Unit) {
     Column(
-        modifier = Modifier.padding(16.dp).fillMaxSize(),
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         BasicText(text = "Hello $name!", modifier = Modifier.testTag("helloContent"))
-        Button(onClick = {
-            updateName("Magic")
-        }, modifier = Modifier.padding(top = 8.dp).testTag("magicButton")) {
+        Button(
+            onClick = {
+                updateName("Magic")
+            }, modifier = Modifier
+                .padding(top = 8.dp)
+                .testTag("magicButton")
+        ) {
             BasicText(text = "Do Magic")
         }
     }

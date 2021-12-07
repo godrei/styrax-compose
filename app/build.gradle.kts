@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdk = 30
-    buildToolsVersion = "30.0.3"
+    compileSdk = 31
+    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "dev.kagamirai.styrax"
         minSdk = 23
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
@@ -61,7 +61,7 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
-        freeCompilerArgs = listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check")
+        freeCompilerArgs = listOf("-Xskip-prerelease-check")
     }
 
     packagingOptions {
@@ -97,9 +97,6 @@ dependencies {
     implementation(Libs.composeTooling)
     implementation(Libs.composeFoundation)
     implementation(Libs.composeMaterial)
-
-    debugImplementation(Libs.kodeinDbDebug)
-    releaseImplementation(Libs.kodeinDb)
 
     testImplementation(Libs.kotlinJdk8)
     testImplementation(Libs.kotlinReflect)
