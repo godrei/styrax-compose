@@ -14,43 +14,135 @@ app:
   - KEYSTORE_PASSWORD: dummy
 
 workflows:
-  primary:
+  # primary workflows for testing nested bitrise run commands
+  nesting_level_5:
     steps:
     - script:
         inputs:
         - content: |-
             #!/usr/bin/env bash
             set -ex
-            bitrise run child_1
+            bitrise run nesting_level_5_child_1
 
-  child_1:
+  nesting_level_10:
     steps:
     - script:
         inputs:
         - content: |-
             #!/usr/bin/env bash
             set -ex
-            bitrise run child_2
+            bitrise run nesting_level_10_child_1
 
-  child_2:
+  # utility workflows for running nested bitrise run commands
+  nesting_level_10_child_1:
     steps:
     - script:
         inputs:
         - content: |-
             #!/usr/bin/env bash
             set -ex
-            bitrise run child_3
+            bitrise run nesting_level_10_child_2
 
-  child_3:
+  nesting_level_10_child_2:
     steps:
     - script:
         inputs:
         - content: |-
             #!/usr/bin/env bash
             set -ex
-            bitrise run child_4
+            bitrise run nesting_level_10_child_3
 
-  child_4:
+  nesting_level_10_child_3:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_4
+
+  nesting_level_10_child_4:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_5
+
+  nesting_level_10_child_5:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_6
+
+  nesting_level_10_child_6:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_7
+
+  nesting_level_10_child_7:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_8
+
+  nesting_level_10_child_8:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_10_child_9
+
+  nesting_level_10_child_9:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run android_uitest
+
+  nesting_level_5_child_1:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_5_child_2
+
+  nesting_level_5_child_2:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_5_child_3
+
+  nesting_level_5_child_3:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run nesting_level_5_child_4
+
+  nesting_level_5_child_4:
     steps:
     - script:
         inputs:
