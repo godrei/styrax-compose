@@ -1,0 +1,72 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: android
+
+app:
+  envs:
+  - PROJECT_LOCATION: "."
+  - MODULE: app
+  - VARIANT: ''
+  - KEYSTORE_KEY_ALIAS: dummy
+  - KEYSTORE_KEY_PASSWORD: dummy
+  - KEYSTORE_PATH: dummy
+  - KEYSTORE_PASSWORD: dummy
+
+workflows:
+  primary:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run child_1
+
+  child_1:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run child_2
+
+  child_2:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run child_3
+
+  child_3:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run child_4
+
+  child_4:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run android_uitest
+
+  android_uitest:
+    steps:
+    - avd-manager@1: {}
+    - wait-for-android-emulator@1: {}
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            ./gradlew connectedFreeDebugAndroidTest
