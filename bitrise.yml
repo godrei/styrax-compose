@@ -5,6 +5,7 @@ project_type: android
 
 app:
   envs:
+  - ENABLE_PROFILING: '1'
   - PROJECT_LOCATION: "."
   - MODULE: app
   - VARIANT: ''
@@ -14,8 +15,23 @@ app:
   - KEYSTORE_PASSWORD: dummy
 
 workflows:
+  _install_custom_cli:
+    steps:
+    - script@1:
+        title: Install custom CLI build
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            go install github.com/bitrise-io/bitrise@4abbcc0b089352714a6372a6fc5d96c6217fb4e7
+            cp $GOPATH/bin/bitrise $(which bitrise)
+  
+  
   # primary workflows for testing nested bitrise run commands
   nesting_level_5:
+    run_before:
+    - _install_custom_cli
     steps:
     - script:
         inputs:
@@ -25,6 +41,8 @@ workflows:
             bitrise run nesting_level_5_child_1
 
   nesting_level_10:
+    run_before:
+    - _install_custom_cli
     steps:
     - script:
         inputs:
