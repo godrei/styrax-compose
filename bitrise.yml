@@ -171,6 +171,9 @@ workflows:
 
   android_uitest:
     steps:
+    - install-missing-android-tools:
+        inputs:
+        - ndk_version: 23.0.7599858
     - avd-manager@1: {}
     - wait-for-android-emulator@1: {}
     - script@1:
