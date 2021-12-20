@@ -186,3 +186,132 @@ workflows:
             ./gradlew connectedFreeDebugAndroidTest
             
             sdkmanager --install "system-images;android-29;default;arm64-v8a"
+
+  log_nesting_level_10:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_1
+  log_nesting_level_10_child_1:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_2
+  log_nesting_level_10_child_2:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_3
+  log_nesting_level_10_child_3:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_4
+  log_nesting_level_10_child_4:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_5
+  log_nesting_level_10_child_5:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_6
+  log_nesting_level_10_child_6:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_7
+  log_nesting_level_10_child_7:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_8
+  log_nesting_level_10_child_8:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log_nesting_level_10_child_9
+  log_nesting_level_10_child_9:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise run log
+
+  log:
+    steps:
+    - script:
+        inputs:
+        - runner_bin: go run
+        - script_file_path: "./new_main.go"
+        - content: |-
+            package main
+
+            import (
+              "bufio"
+              "fmt"
+              "strings"
+              "sync"
+            )
+
+            var longMessage = strings.Repeat(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris enim, faucibus id porta id, mollis ut lorem. Quisque bibendum dolor in mi ullamcorper commodo vitae nec turpis. Sed suscipit tincidunt felis, ac molestie urna euismod in. Pellentesque malesuada, augue finibus ullamcorper tincidunt, lorem justo ultricies nibh, id volutpat ligula felis quis nulla. Donec accumsan maximus elit, facilisis facilisis orci. Donec odio ligula, mattis in tincidunt quis, accumsan a leo. Curabitur nisi nisi, ultrices ut urna quis, varius tempus turpis. Curabitur non finibus magna. Nunc non nisi accumsan, bibendum lorem pretium, eleifend metus. Etiam eget nulla quis lectus sollicitudin condimentum eget et felis. Fusce a accumsan lectus.
+
+            Sed a augue est. Morbi sit amet arcu vitae diam tristique convallis. Cras dictum fermentum elit. Proin eget diam libero. Nulla ante erat, accumsan volutpat orci vel, tincidunt fermentum felis. Sed nec ante a arcu tincidunt mollis. Phasellus sit amet dignissim eros. Pellentesque sed mauris turpis. Nunc pretium viverra ipsum at scelerisque. Donec id auctor nisl. Nullam gravida venenatis risus varius iaculis. Vivamus diam metus, iaculis at dui sit amet, commodo dapibus nunc. Mauris ultricies enim nulla, non maximus arcu finibus ac.
+
+            Sed eu sem velit. Curabitur condimentum aliquet hendrerit. Aenean ut enim id velit rutrum ultricies. Nunc a nulla a ipsum mattis scelerisque. Donec pharetra mollis erat, id ullamcorper odio sodales id. Etiam ultricies sed ipsum ac pulvinar. Vivamus sed feugiat libero, vel eleifend augue. Nam a mi vitae est bibendum pellentesque. Vestibulum sed blandit arcu.
+
+            Fusce pharetra lacus at eros fermentum vestibulum. Nulla luctus ornare mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla pellentesque eros fringilla tempus laoreet. Aenean a ex eget nunc posuere consequat. Aenean at nisi sollicitudin lacus varius luctus in nec felis. Vivamus ut ipsum dolor. Praesent neque tortor, tincidunt nec convallis in, tempus non est. Suspendisse ante lorem, ornare non varius et, rutrum eget tellus. Nunc malesuada sem est, nec tempus nunc fringilla in. Sed imperdiet tellus quis convallis porta. Donec aliquet nisl vitae nulla dapibus, vel consectetur ligula auctor. Vestibulum dignissim consectetur lacus id scelerisque. Nullam semper augue sed velit ultricies, pretium tempus turpis hendrerit.
+
+            In interdum nibh a dignissim viverra. Mauris orci leo, ultricies sit amet odio non, consectetur vulputate purus. Suspendisse consequat ligula ipsum, sit amet consectetur enim aliquet et. Ut imperdiet varius lectus non gravida. Suspendisse et turpis varius nulla sollicitudin malesuada. Vivamus id sem at odio dictum dapibus quis sed diam. Sed lacinia nulla interdum mattis tincidunt. Etiam eget ullamcorper arcu, vitae elementum est.`, 100)
+
+            func printLongMessage(i int, message string, wg *sync.WaitGroup) {
+              r := strings.NewReader(message)
+              scanner := bufio.NewScanner(r)
+              for scanner.Scan() {
+                line := scanner.Text()
+
+                fmt.Println(i, ": ", line)
+              }
+              wg.Done()
+            }
+
+            func main() {
+              const iterations = 10
+
+              wg := sync.WaitGroup{}
+              wg.Add(iterations)
+              for i := 0; i < iterations; i++ {
+                go printLongMessage(i, longMessage, &wg)
+              }
+              wg.Wait()
+            }
