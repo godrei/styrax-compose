@@ -23,6 +23,9 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
+            # check status
+            python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); print(flags&os.O_NONBLOCK);'
+
             # turn on non-blocking
             python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags|os.O_NONBLOCK);'
 
