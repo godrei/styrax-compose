@@ -15,6 +15,72 @@ app:
   - KEYSTORE_PASSWORD: dummy
 
 workflows:
+  non_blocking_test:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            # turn on non-blocking
+            python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags|os.O_NONBLOCK);'
+
+            # check status
+            python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); print(flags&os.O_NONBLOCK);'
+
+            print () {
+              for i in {1..10}; do curl -s https://raw.githubusercontent.com/dogukancagatay/lorem_ipsum/master/lorem_ipsum.sh | bash /dev/stdin -p 150; done
+            }
+
+            print &
+
+            bitrise run heavy_printer
+
+  heavy_printer:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            print () {
+              for i in {1..10}; do curl -s https://raw.githubusercontent.com/dogukancagatay/lorem_ipsum/master/lorem_ipsum.sh | bash /dev/stdin -p 150; done
+            }
+
+            print &
+            bitrise run heavy_printer_1
+
+  heavy_printer_1:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            print () {
+              for i in {1..10}; do curl -s https://raw.githubusercontent.com/dogukancagatay/lorem_ipsum/master/lorem_ipsum.sh | bash /dev/stdin -p 150; done
+            }
+
+            print &
+            bitrise run heavy_printer_2
+
+  heavy_printer_2:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            print () {
+              for i in {1..10}; do curl -s https://raw.githubusercontent.com/dogukancagatay/lorem_ipsum/master/lorem_ipsum.sh | bash /dev/stdin -p 150; done
+            }
+
+            print
+
   _install_custom_cli:
     steps:
     - script@1:
