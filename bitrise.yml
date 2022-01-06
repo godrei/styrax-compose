@@ -15,7 +15,18 @@ app:
   - KEYSTORE_PASSWORD: dummy
 
 workflows:
+  sleep:
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            sleep 360
+
   non_blocking_test:
+    before_run:
+    - _install_custom_cli
     steps:
     - script:
         inputs:
@@ -111,13 +122,13 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
-            go install github.com/bitrise-io/bitrise@4abbcc0b089352714a6372a6fc5d96c6217fb4e7
+            go install github.com/bitrise-io/bitrise@04d8af7a5acb17105032fb79d67ae4eea3d83fd7
             cp $GOPATH/bin/bitrise $(which bitrise)
   
   
   # primary workflows for testing nested bitrise run commands
   nesting_level_5:
-    run_before:
+    before_run:
     - _install_custom_cli
     steps:
     - script:
@@ -128,7 +139,7 @@ workflows:
             bitrise run nesting_level_5_child_1
 
   nesting_level_10:
-    run_before:
+    before_run:
     - _install_custom_cli
     steps:
     - script:
