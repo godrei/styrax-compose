@@ -124,6 +124,14 @@ workflows:
 
             go install github.com/bitrise-io/bitrise@04d8af7a5acb17105032fb79d67ae4eea3d83fd7
             cp $GOPATH/bin/bitrise $(which bitrise)
+    - script@1:
+        title: Print new CLI version
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            bitrise -v
   
   
   # primary workflows for testing nested bitrise run commands
